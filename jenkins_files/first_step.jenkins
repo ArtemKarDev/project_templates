@@ -4,14 +4,17 @@ properties([disableConcurrentBuilds()]) //запрет на одновремен
 
 pipeline {
 	agent {
-		label 'master'
+		any
 	}
 	options {
 		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-		timestamps()
+		//timestamps()
 	}
 	stages {
 		stage("First step") {
+			options {
+				timestamps()
+			}
 			steps {
 				sh 'ssh root@ub1 \'hostname\''
 			}
