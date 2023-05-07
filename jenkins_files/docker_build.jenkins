@@ -43,8 +43,7 @@ pipeline {
 				sh """
 				docker push artemkardev/toolbox:latest 
 				""" 
-				} 
-			}
-		}	
-	}
+			} 
+		}
+	}	
 }
