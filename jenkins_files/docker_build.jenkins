@@ -19,7 +19,7 @@ pipeline {
 				dir ('docker_files/toolbox') {
 					sh 'docker build . ' 
 				}
-			}
+			} 
 		}	
 	}
 }
