@@ -6,14 +6,12 @@ pipeline {
 	agent any
 	// triggers{ pollSCM('*****') } // опрашивать гитхаб об изменениях
 		options {
-		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-		//timestamps()
+			timestamps()
+			buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+		
 	}
 	stages {
 		stage("docker login"){
-			options {
-				timestamps()
-			}
 			steps {
 				echo "============= docker login ============="
 				withCredentials([usernamePassword(credentialsId: 'dockerhub_artemkardev', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -24,9 +22,6 @@ pipeline {
 			} 			
 		}
 		stage("Create docker image") {
-			options {
-				timestamps()
-			}
 			steps {
 				echo "============= start building image ============="
 				dir ('docker_files/toolbox') {
@@ -35,9 +30,6 @@ pipeline {
 			}
 		}
 		stage("docker push") {
-			options {
-				timestamps()
-			}
 			steps {
 				echo "============= start pushing image ============="
 				sh """
